@@ -1,24 +1,73 @@
 import React, { useState, useEffect } from 'react';
-import { AppTab } from './types';
+import { AppTab, Article } from './types';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HomeScreen } from './components/HomeScreen';
 import { ServicesScreen } from './components/ServicesScreen';
 import { BookingScreen } from './components/BookingScreen';
 import { BlogScreen } from './components/BlogScreen';
+import { ArticlePage } from './components/ArticlePage';
 import { ContactScreen } from './components/ContactScreen';
 import { LegalModal } from './components/LegalModals';
 import { StickyContactBar } from './components/StickyContactBar';
 import { toggleSpaAmbientAudio } from './utils/spaAudio';
+import { SEOHead } from './components/SEOHead';
+import { ARTICLES_DATA } from './data/spaData';
 import { Calendar, Volume2, VolumeX, Sparkles, X, Play } from 'lucide-react';
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState<AppTab>('home');
+  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
   const [preselectedServiceId, setPreselectedServiceId] = useState<string | null>(null);
   const [legalModalType, setLegalModalType] = useState<'privacy' | 'terms' | null>(null);
   const [isAudioPlaying, setIsAudioPlaying] = useState<boolean>(false);
   const [bookingCount, setBookingCount] = useState<number>(0);
   const [videoTourOpen, setVideoTourOpen] = useState(false);
+
+  // Sync route from URL on mount & back/forward navigation
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+
+      if (path.startsWith('/blog/') || hash.startsWith('#blog-')) {
+        const slug = path.startsWith('/blog/')
+          ? path.replace('/blog/', '').replace(/\/$/, '')
+          : hash.replace('#blog-', '');
+
+        const found = ARTICLES_DATA.find(
+          (a) => a.slug.toLowerCase() === slug || a.id.toLowerCase() === slug
+        );
+
+        if (found) {
+          setSelectedArticle(found);
+          setCurrentTab('article');
+          return;
+        }
+      }
+
+      if (path === '/blog' || hash === '#blog') {
+        setSelectedArticle(null);
+        setCurrentTab('blog');
+      } else if (path === '/services' || hash === '#services') {
+        setSelectedArticle(null);
+        setCurrentTab('services');
+      } else if (path === '/booking' || hash === '#booking') {
+        setSelectedArticle(null);
+        setCurrentTab('booking');
+      } else if (path === '/contact' || hash === '#contact') {
+        setSelectedArticle(null);
+        setCurrentTab('contact');
+      } else {
+        setSelectedArticle(null);
+        setCurrentTab('home');
+      }
+    };
+
+    handlePopState();
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   // Sync booking count from localStorage
   useEffect(() => {
@@ -34,13 +83,55 @@ export default function App() {
   }, [currentTab]);
 
   const handleSelectTab = (tab: AppTab) => {
+    setSelectedArticle(null);
     setCurrentTab(tab);
+
+    const newPath =
+      tab === 'home'
+        ? '/'
+        : tab === 'blog'
+        ? '/blog'
+        : tab === 'services'
+        ? '/services'
+        : tab === 'booking'
+        ? '/booking'
+        : tab === 'contact'
+        ? '/contact'
+        : '/';
+
+    try {
+      window.history.pushState({ tab }, '', newPath);
+    } catch {
+      // safe fallback in restricted iframe
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleOpenArticle = (article: Article) => {
+    setSelectedArticle(article);
+    setCurrentTab('article');
+
+    try {
+      window.history.pushState({ tab: 'article', slug: article.slug }, '', `/blog/${article.slug}`);
+    } catch {
+      // fallback
+    }
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleBookService = (serviceId: string) => {
     setPreselectedServiceId(serviceId);
+    setSelectedArticle(null);
     setCurrentTab('booking');
+
+    try {
+      window.history.pushState({ tab: 'booking' }, '', '/booking');
+    } catch {
+      // fallback
+    }
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -52,9 +143,16 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#f7f9ff] text-[#161c22] font-sans antialiased selection:bg-[#fed65b] selection:text-[#745c00] relative">
+      {/* Dynamic SEO Meta Tags, Canonical, and Schema.org JSON-LD */}
+      <SEOHead
+        currentTab={currentTab}
+        currentArticle={selectedArticle}
+        selectedServiceId={preselectedServiceId}
+      />
+
       {/* Top Header / Navigation Bar */}
       <Navbar
-        currentTab={currentTab}
+        currentTab={currentTab === 'article' ? 'blog' : currentTab}
         onSelectTab={handleSelectTab}
         bookingCount={bookingCount}
         isAudioPlaying={isAudioPlaying}
@@ -68,6 +166,7 @@ export default function App() {
             onSelectTab={handleSelectTab}
             onBookService={handleBookService}
             onOpenVideoTour={() => setVideoTourOpen(true)}
+            onOpenArticle={handleOpenArticle}
           />
         )}
 
@@ -89,6 +188,16 @@ export default function App() {
         {currentTab === 'blog' && (
           <BlogScreen
             onSelectTab={handleSelectTab}
+            onOpenArticle={handleOpenArticle}
+            onBookService={handleBookService}
+          />
+        )}
+
+        {currentTab === 'article' && selectedArticle && (
+          <ArticlePage
+            article={selectedArticle}
+            onSelectTab={handleSelectTab}
+            onOpenArticle={handleOpenArticle}
             onBookService={handleBookService}
           />
         )}
@@ -179,3 +288,4 @@ export default function App() {
     </div>
   );
 }
+

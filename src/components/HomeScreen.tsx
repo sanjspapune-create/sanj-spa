@@ -1,20 +1,23 @@
 import React from 'react';
-import { AppTab, Service } from '../types';
-import { SERVICES_DATA, SPA_INFO, TESTIMONIALS_DATA } from '../data/spaData';
-import { PlayCircle, ArrowRight, Sparkles, ShieldCheck, Droplets, Wind, CheckCircle2 } from 'lucide-react';
+import { AppTab, Article, Service } from '../types';
+import { SERVICES_DATA, SPA_INFO, TESTIMONIALS_DATA, ARTICLES_DATA } from '../data/spaData';
+import { PlayCircle, ArrowRight, Sparkles, ShieldCheck, Droplets, Wind, CheckCircle2, BookOpen, Clock } from 'lucide-react';
 
 interface HomeScreenProps {
   onSelectTab: (tab: AppTab) => void;
   onBookService: (serviceId: string) => void;
   onOpenVideoTour: () => void;
+  onOpenArticle?: (article: Article) => void;
 }
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({
   onSelectTab,
   onBookService,
   onOpenVideoTour,
+  onOpenArticle,
 }) => {
   const featuredServices = SERVICES_DATA.slice(0, 4);
+  const featuredArticles = ARTICLES_DATA.slice(0, 3);
 
   return (
     <div className="w-full">
@@ -244,6 +247,82 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             </div>
             <span className="text-[11px] text-[#c0d5c2]">Open daily 8:00 AM – 9:30 PM</span>
           </div>
+        </div>
+      </section>
+
+      {/* Wellness Journal Highlights */}
+      <section className="max-w-[1200px] mx-auto px-6 md:px-8 mb-24">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+          <div>
+            <span className="font-sans text-xs font-semibold text-[#735c00] tracking-[0.2em] uppercase block mb-2">
+              WELLNESS JOURNAL
+            </span>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#334537]">
+              Expert Guides & Massage Insights
+            </h2>
+          </div>
+          <button
+            onClick={() => onSelectTab('blog')}
+            className="group flex items-center gap-2 text-xs font-bold text-[#334537] hover:text-[#735c00] tracking-wider uppercase transition-colors"
+          >
+            <span>Explore All Articles</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {featuredArticles.map((article) => (
+            <article
+              key={article.id}
+              onClick={() => (onOpenArticle ? onOpenArticle(article) : onSelectTab('blog'))}
+              className="glass-panel-white rounded-2xl border border-[#dde3eb] overflow-hidden flex flex-col hover:border-[#334537]/30 hover:shadow-lg transition-all duration-300 group cursor-pointer"
+            >
+              <div className="relative aspect-[16/10] overflow-hidden bg-[#eff4fc]">
+                <img
+                  src={article.image}
+                  alt={article.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute top-3 left-3 bg-[#334537]/90 text-[#fed65b] text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider backdrop-blur-xs">
+                  {article.category}
+                </div>
+              </div>
+
+              <div className="p-6 flex-1 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-3 text-xs text-[#737872] mb-2.5">
+                    <span>{article.publishedDate}</span>
+                    <span>•</span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3 h-3 text-[#735c00]" />
+                      {article.readMinutes} min read
+                    </span>
+                  </div>
+                  <h3 className="font-serif text-lg font-bold text-[#334537] group-hover:text-[#735c00] transition-colors leading-snug mb-2">
+                    {article.title}
+                  </h3>
+                  <p className="font-sans text-xs text-[#434843] line-clamp-2 leading-relaxed">
+                    {article.snippet}
+                  </p>
+                </div>
+
+                <div className="pt-4 mt-4 border-t border-[#dde3eb]/60 flex items-center justify-between">
+                  <span className="font-sans text-xs font-semibold text-[#334537] group-hover:underline">
+                    Read Article →
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={article.author.avatar}
+                      alt={article.author.name}
+                      className="w-6 h-6 rounded-full object-cover border border-[#dde3eb]"
+                    />
+                    <span className="text-[11px] text-[#737872]">{article.author.name}</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
