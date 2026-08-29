@@ -192,7 +192,7 @@ export const ARTICLES_DATA: Article[] = [
       'Ideal for active professionals, athletes, and anyone seeking structural relief in Baner.',
     ],
     author: {
-      name: 'Dr. Ananya Kulkarni',
+      name: 'Ananya Kulkarni',
       role: 'Lead Wellness Director',
       avatar: 'https://images.unsplash.com/photo-1594824813501-489578051283?w=150&auto=format&fit=crop&q=80',
     },
@@ -325,7 +325,7 @@ export const FAQS_DATA: FAQItem[] = [
 export const TESTIMONIALS_DATA = [
   {
     id: 'test-1',
-    name: 'Pooja Nair',
+    name: 'Pooja',
     neighborhood: 'Balewadi, Pune',
     service: 'Deep Tissue Therapy',
     comment: 'The moment you enter Sanj Spa, the noise of Baner completely disappears. The therapist had remarkable precision with shoulder knots. A truly five-star experience.',
@@ -333,7 +333,7 @@ export const TESTIMONIALS_DATA = [
   },
   {
     id: 'test-2',
-    name: 'Vikram Mehta',
+    name: 'Vikram',
     neighborhood: 'Aundh, Pune',
     service: 'Traditional Thai Massage',
     comment: 'The best authentic Thai massage in western Pune. Clean, tranquil, and the hospitality is exceptional. The herbal tea afterwards was sublime.',
@@ -341,10 +341,10 @@ export const TESTIMONIALS_DATA = [
   },
   {
     id: 'test-3',
-    name: 'Dr. Radhika Sen',
+    name: 'Radhika',
     neighborhood: 'Baner, Pune',
     service: 'Aromatherapy & Glow Facial',
-    comment: 'As a healthcare professional, quiet luxury and hygiene are everything to me. Sanj Spa exceeds all benchmarks. I book my bi-weekly retreat here religiously.',
+    comment: 'Quiet luxury, thoughtful therapists, and pristine hygiene make Sanj Spa truly special. It has become my go-to sanctuary in Baner.',
     rating: 5,
   },
 ];
