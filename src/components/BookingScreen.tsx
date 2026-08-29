@@ -131,7 +131,7 @@ export const BookingScreen: React.FC<BookingScreenProps> = ({
   const handleDownloadPass = (booking: Booking) => {
     const content = `===========================================
 SANJ SPA BANER - APPOINTMENT PASS
-123 Wellness Avenue, Baner, Pune 411045
+Baner - Mahalunge Road, Baner, Pune, Maharashtra 411045
 Ph: +91 78754 31212
 ===========================================
 Booking Reference : ${booking.bookingRef}

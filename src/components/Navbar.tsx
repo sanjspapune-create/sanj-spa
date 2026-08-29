@@ -32,31 +32,31 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="docked full-width top-0 sticky backdrop-blur-md shadow-sm bg-[#f7f9ff]/90 z-50 transition-all duration-300 border-b border-[#dde3eb]/50">
-      <div className="flex justify-between items-center w-full px-5 md:px-8 max-w-[1200px] mx-auto h-20">
+    <header className="docked full-width top-0 sticky backdrop-blur-md shadow-xs bg-white/95 z-50 transition-all duration-300 border-b border-[#dde3eb]/70">
+      <div className="flex justify-between items-center w-full px-4 sm:px-6 lg:px-8 max-w-[1360px] mx-auto h-[72px]">
         {/* Brand Logo */}
         <div
           id="navbar-brand"
           onClick={() => handleNav('home')}
-          className="flex items-center gap-2 group cursor-pointer select-none"
+          className="flex items-center gap-3 group cursor-pointer select-none shrink-0"
         >
-          <div className="text-[#334537] group-hover:rotate-12 transition-transform duration-500">
-            <SpaIcon className="w-8 h-8" />
+          <div className="text-[#334537] group-hover:scale-105 transition-transform duration-300">
+            <SpaIcon className="w-7 h-7" />
           </div>
-          <h1 className="font-serif text-xl sm:text-2xl md:text-[26px] tracking-[0.18em] text-[#334537] m-0 font-bold leading-none">
-            {SPA_INFO.name}
-          </h1>
+          <span className="font-serif text-xl sm:text-[22px] tracking-[0.16em] text-[#334537] m-0 font-bold leading-none whitespace-nowrap">
+            SANJ SPA BANER
+          </span>
         </div>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex gap-7 items-center font-sans text-[15px]">
+        {/* Desktop Navigation Menu */}
+        <nav className="hidden md:flex gap-6 lg:gap-9 items-center font-sans text-[15px]">
           <button
             id="nav-home-btn"
             onClick={() => handleNav('home')}
-            className={`transition-all duration-200 py-1 px-1 relative ${
+            className={`transition-colors duration-200 py-1 font-medium relative ${
               currentTab === 'home'
                 ? 'text-[#735c00] font-semibold border-b-2 border-[#735c00]'
-                : 'text-[#434843] hover:text-[#334537] hover:bg-[#eff4fc] px-3 py-1.5 rounded-lg'
+                : 'text-[#434843] hover:text-[#161c22]'
             }`}
           >
             Home
@@ -64,10 +64,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             id="nav-services-btn"
             onClick={() => handleNav('services')}
-            className={`transition-all duration-200 py-1 px-1 relative ${
+            className={`transition-colors duration-200 py-1 font-medium relative ${
               currentTab === 'services'
                 ? 'text-[#735c00] font-semibold border-b-2 border-[#735c00]'
-                : 'text-[#434843] hover:text-[#334537] hover:bg-[#eff4fc] px-3 py-1.5 rounded-lg'
+                : 'text-[#434843] hover:text-[#161c22]'
             }`}
           >
             Services
@@ -75,10 +75,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             id="nav-blog-btn"
             onClick={() => handleNav('blog')}
-            className={`transition-all duration-200 py-1 px-1 relative ${
+            className={`transition-colors duration-200 py-1 font-medium relative ${
               currentTab === 'blog'
                 ? 'text-[#735c00] font-semibold border-b-2 border-[#735c00]'
-                : 'text-[#434843] hover:text-[#334537] hover:bg-[#eff4fc] px-3 py-1.5 rounded-lg'
+                : 'text-[#434843] hover:text-[#161c22]'
             }`}
           >
             Wellness Blog
@@ -86,10 +86,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             id="nav-contact-btn"
             onClick={() => handleNav('contact')}
-            className={`transition-all duration-200 py-1 px-1 relative ${
+            className={`transition-colors duration-200 py-1 font-medium relative ${
               currentTab === 'contact'
                 ? 'text-[#735c00] font-semibold border-b-2 border-[#735c00]'
-                : 'text-[#434843] hover:text-[#334537] hover:bg-[#eff4fc] px-3 py-1.5 rounded-lg'
+                : 'text-[#434843] hover:text-[#161c22]'
             }`}
           >
             Contact
@@ -97,14 +97,14 @@ export const Navbar: React.FC<NavbarProps> = ({
         </nav>
 
         {/* Action Controls */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-2.5 lg:gap-3 shrink-0">
           {/* Quick WhatsApp Connect */}
           <a
             id="navbar-whatsapp-btn"
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 bg-[#25D366]/10 hover:bg-[#25D366] text-[#128C7E] hover:text-white border border-[#25D366]/40 px-3.5 py-2 rounded-full font-sans text-xs font-semibold transition-all duration-200 shadow-xs"
+            className="flex items-center gap-1.5 bg-[#eaf8f0] hover:bg-[#25D366] text-[#1e954c] hover:text-white border border-[#a3e4be] px-3.5 py-1.5 rounded-full font-sans text-xs font-semibold transition-all duration-200 shadow-2xs"
             title="Chat on WhatsApp +91 78754 31212"
           >
             <svg
@@ -121,7 +121,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <a
             id="navbar-call-btn"
             href={`tel:${phoneNumber}`}
-            className="flex items-center gap-1.5 bg-[#fed65b]/20 hover:bg-[#fed65b] text-[#745c00] border border-[#fed65b]/60 px-3.5 py-2 rounded-full font-sans text-xs font-bold transition-all duration-200 shadow-xs"
+            className="flex items-center gap-1.5 bg-[#fff9e6] hover:bg-[#fed65b] text-[#8a6800] border border-[#f0d480] px-3.5 py-1.5 rounded-full font-sans text-xs font-semibold transition-all duration-200 shadow-2xs"
             title="Call +91 78754 31212"
           >
             <PhoneCall className="w-3.5 h-3.5" />
@@ -133,16 +133,16 @@ export const Navbar: React.FC<NavbarProps> = ({
             id="ambient-sound-toggle-btn"
             onClick={onToggleAudio}
             title={isAudioPlaying ? 'Pause Ambient Sound' : 'Play Soothing Spa Soundscape'}
-            className={`p-2.5 rounded-full transition-all duration-300 flex items-center gap-1.5 text-xs font-sans font-medium border ${
+            className={`w-8 h-8 rounded-full transition-all duration-300 flex items-center justify-center border ${
               isAudioPlaying
-                ? 'bg-[#d3e8d5] text-[#0e1f13] border-[#b7ccb9] shadow-inner'
-                : 'bg-white/80 text-[#434843] border-[#dde3eb] hover:bg-[#eff4fc]'
+                ? 'bg-[#d3e8d5] text-[#0e1f13] border-[#b7ccb9]'
+                : 'bg-white text-[#5d645e] border-[#dde3eb] hover:bg-[#eff4fc]'
             }`}
           >
             {isAudioPlaying ? (
-              <Volume2 className="w-4 h-4 text-[#334537] animate-pulse" />
+              <Volume2 className="w-3.5 h-3.5 text-[#334537] animate-pulse" />
             ) : (
-              <VolumeX className="w-4 h-4 text-[#737872]" />
+              <VolumeX className="w-3.5 h-3.5 text-[#737872]" />
             )}
           </button>
 
@@ -150,11 +150,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             id="nav-book-now-btn"
             onClick={() => handleNav('booking')}
-            className="bg-[#334537] hover:bg-[#4a5d4e] text-white font-sans text-xs font-semibold tracking-wider uppercase px-5 py-2.5 rounded-full transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:scale-95 flex items-center gap-2"
+            className="bg-[#2d3b2f] hover:bg-[#3d4f40] text-white font-sans text-xs font-bold tracking-wider uppercase px-5 py-2 rounded-full transition-all duration-300 shadow-xs hover:shadow-md active:scale-95 flex items-center gap-2 whitespace-nowrap"
           >
-            <span>Book Now</span>
+            <span>BOOK NOW</span>
             {bookingCount > 0 && (
-              <span className="w-5 h-5 rounded-full bg-[#fed65b] text-[#745c00] text-[11px] font-bold flex items-center justify-center">
+              <span className="w-4 h-4 rounded-full bg-[#fed65b] text-[#745c00] text-[10px] font-bold flex items-center justify-center">
                 {bookingCount}
               </span>
             )}

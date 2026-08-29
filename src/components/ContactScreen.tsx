@@ -3,6 +3,7 @@ import { AppTab, FAQItem } from '../types';
 import { FAQS_DATA, SPA_INFO } from '../data/spaData';
 import { SpaIcon } from './SpaIcon';
 import { MapPin, Phone, Mail, ChevronDown, Send, CheckCircle2, Navigation, Clock } from 'lucide-react';
+import { SpaMapLocator } from './SpaMapLocator';
 
 interface ContactScreenProps {
   onSelectTab: (tab: AppTab) => void;
@@ -62,8 +63,8 @@ export const ContactScreen: React.FC<ContactScreenProps> = ({ onSelectTab }) => 
                   Visit Us
                 </h3>
                 <p className="font-sans text-sm text-[#434843] leading-relaxed">
-                  123 Wellness Avenue<br />
-                  Baner, Pune 411045
+                  Baner - Mahalunge Road<br />
+                  Baner, Pune, Maharashtra 411045
                 </p>
                 <span className="text-[11px] text-[#735c00] font-medium flex items-center gap-1 mt-1">
                   <Navigation className="w-3 h-3" /> View Map Below
@@ -324,50 +325,23 @@ export const ContactScreen: React.FC<ContactScreenProps> = ({ onSelectTab }) => 
         </div>
       </section>
 
-      {/* Map Section (Screen 5) */}
+      {/* Map Section (Store Locator & Neighborhood Map) */}
       <section id="map-section" className="space-y-4">
-        <div className="flex justify-between items-end">
+        <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-2">
           <div>
             <span className="font-sans text-xs font-semibold text-[#735c00] tracking-[0.2em] uppercase block mb-1">
-              NEIGHBORHOOD MAP
+              STORE LOCATOR & MAP
             </span>
-            <h3 className="font-serif text-2xl font-bold text-[#334537]">
-              Finding Sanj Spa in Baner
-            </h3>
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#334537]">
+              Visit Our Spa in Baner
+            </h2>
           </div>
-          <a
-            href="https://maps.google.com/?q=Baner+Pune+Maharashtra"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs text-[#334537] hover:text-[#735c00] underline font-sans font-semibold flex items-center gap-1"
-          >
-            <Navigation className="w-3.5 h-3.5" />
-            <span>Open in Google Maps</span>
-          </a>
+          <p className="text-xs text-[#5d645e] font-sans">
+            Conveniently situated on Baner - Mahalunge Road with dedicated valet & client parking
+          </p>
         </div>
 
-        <div className="w-full h-80 sm:h-96 rounded-3xl overflow-hidden glass-panel ambient-shadow relative border border-[#dde3eb]">
-          {/* Map Image */}
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: `url('https://lh3.googleusercontent.com/aida-public/AB6AXuCj6CAxzWUedCwhLrXWzIh8Q_AEg8Z8jSzVoKPPKq8s8me3YHjdE2JO1eGai06b_9iNiUtXZWv7sz5rmN3EmglR9sN0rwQMozwpvaS0Hl5ae2QzawwpwifhKB9vjsqyYAhV8C9lrwyPjE9aAss8tlKuSgCLveuBnE0zRUnwQtLHKktuM4quG7J30YnisO2BRvHUtimH4g-4GMxs0Fh-fPddJxs-M97niwC66L8zmUQQ3G_hOWZp08HqkQ')`,
-            }}
-          ></div>
-
-          {/* Decorative Map Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#f7f9ff]/40 to-transparent pointer-events-none"></div>
-
-          {/* Central Spa Pin & Location Label */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-            <div className="w-12 h-12 bg-[#735c00] text-white rounded-full flex items-center justify-center shadow-xl mb-2 hover:scale-110 transition-transform duration-300 cursor-pointer border-2 border-white animate-bounce">
-              <SpaIcon className="w-6 h-6" />
-            </div>
-            <div className="bg-white/95 backdrop-blur-md px-4 py-1.5 rounded-full shadow-md font-sans text-xs font-bold text-[#334537] text-center border border-[#dde3eb] whitespace-nowrap">
-              SANJ SPA BANER
-            </div>
-          </div>
-        </div>
+        <SpaMapLocator onBookClick={() => onSelectTab('booking')} />
       </section>
     </div>
   );
