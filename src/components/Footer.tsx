@@ -91,30 +91,46 @@ export const Footer: React.FC<FooterProps> = ({
             <span className="font-sans text-xs font-semibold text-[#161c22] tracking-[0.14em] uppercase mb-1">
               EXPLORE
             </span>
-            <button
-              onClick={() => handleNav('services')}
+            <a
+              href="/services"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNav('services');
+              }}
               className="text-left font-sans text-sm text-[#434843] hover:text-[#334537] transition-colors underline opacity-85 hover:opacity-100 w-fit"
             >
               Services & Therapies
-            </button>
-            <button
-              onClick={() => handleNav('blog')}
+            </a>
+            <a
+              href="/blog"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNav('blog');
+              }}
               className="text-left font-sans text-sm text-[#434843] hover:text-[#334537] transition-colors underline opacity-85 hover:opacity-100 w-fit"
             >
               Wellness Blog
-            </button>
-            <button
-              onClick={() => handleNav('booking')}
+            </a>
+            <a
+              href="/booking"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNav('booking');
+              }}
               className="text-left font-sans text-sm text-[#434843] hover:text-[#334537] transition-colors underline opacity-85 hover:opacity-100 w-fit"
             >
               Book an Escape
-            </button>
-            <button
-              onClick={() => handleNav('contact')}
+            </a>
+            <a
+              href="/contact"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNav('contact');
+              }}
               className="text-left font-sans text-sm text-[#434843] hover:text-[#334537] transition-colors underline opacity-85 hover:opacity-100 w-fit"
             >
               FAQ & Location
-            </button>
+            </a>
           </div>
 
           {/* Legal Links */}

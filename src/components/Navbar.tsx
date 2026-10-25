@@ -50,9 +50,13 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Desktop Navigation Menu */}
         <nav className="hidden md:flex gap-6 lg:gap-9 items-center font-sans text-[15px]">
-          <button
+          <a
             id="nav-home-btn"
-            onClick={() => handleNav('home')}
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNav('home');
+            }}
             className={`transition-colors duration-200 py-1 font-medium relative ${
               currentTab === 'home'
                 ? 'text-[#735c00] font-semibold border-b-2 border-[#735c00]'
@@ -60,10 +64,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             Home
-          </button>
-          <button
+          </a>
+          <a
             id="nav-services-btn"
-            onClick={() => handleNav('services')}
+            href="/services"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNav('services');
+            }}
             className={`transition-colors duration-200 py-1 font-medium relative ${
               currentTab === 'services'
                 ? 'text-[#735c00] font-semibold border-b-2 border-[#735c00]'
@@ -71,10 +79,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             Services
-          </button>
-          <button
+          </a>
+          <a
             id="nav-blog-btn"
-            onClick={() => handleNav('blog')}
+            href="/blog"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNav('blog');
+            }}
             className={`transition-colors duration-200 py-1 font-medium relative ${
               currentTab === 'blog'
                 ? 'text-[#735c00] font-semibold border-b-2 border-[#735c00]'
@@ -82,10 +94,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             Wellness Blog
-          </button>
-          <button
+          </a>
+          <a
             id="nav-contact-btn"
-            onClick={() => handleNav('contact')}
+            href="/contact"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNav('contact');
+            }}
             className={`transition-colors duration-200 py-1 font-medium relative ${
               currentTab === 'contact'
                 ? 'text-[#735c00] font-semibold border-b-2 border-[#735c00]'
@@ -93,7 +109,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             Contact
-          </button>
+          </a>
         </nav>
 
         {/* Action Controls */}
@@ -147,9 +163,13 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           {/* Book Now Button */}
-          <button
+          <a
             id="nav-book-now-btn"
-            onClick={() => handleNav('booking')}
+            href="/booking"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNav('booking');
+            }}
             className="bg-[#2d3b2f] hover:bg-[#3d4f40] text-white font-sans text-xs font-bold tracking-wider uppercase px-5 py-2 rounded-full transition-all duration-300 shadow-xs hover:shadow-md active:scale-95 flex items-center gap-2 whitespace-nowrap"
           >
             <span>BOOK NOW</span>
@@ -158,7 +178,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 {bookingCount}
               </span>
             )}
-          </button>
+          </a>
         </div>
 
         {/* Mobile Hamburger & Controls */}
@@ -221,40 +241,60 @@ export const Navbar: React.FC<NavbarProps> = ({
             </a>
           </div>
 
-          <button
-            onClick={() => handleNav('home')}
-            className={`text-left py-2.5 px-3 rounded-lg font-sans text-base ${
+          <a
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNav('home');
+            }}
+            className={`text-left py-2.5 px-3 rounded-lg font-sans text-base block ${
               currentTab === 'home' ? 'bg-[#eff4fc] text-[#735c00] font-semibold' : 'text-[#161c22]'
             }`}
           >
             Home
-          </button>
-          <button
-            onClick={() => handleNav('services')}
-            className={`text-left py-2.5 px-3 rounded-lg font-sans text-base ${
+          </a>
+          <a
+            href="/services"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNav('services');
+            }}
+            className={`text-left py-2.5 px-3 rounded-lg font-sans text-base block ${
               currentTab === 'services' ? 'bg-[#eff4fc] text-[#735c00] font-semibold' : 'text-[#161c22]'
             }`}
           >
             Massage & Therapies
-          </button>
-          <button
-            onClick={() => handleNav('blog')}
-            className={`text-left py-2.5 px-3 rounded-lg font-sans text-base ${
+          </a>
+          <a
+            href="/blog"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNav('blog');
+            }}
+            className={`text-left py-2.5 px-3 rounded-lg font-sans text-base block ${
               currentTab === 'blog' ? 'bg-[#eff4fc] text-[#735c00] font-semibold' : 'text-[#161c22]'
             }`}
           >
             Wellness Blog & Insights
-          </button>
-          <button
-            onClick={() => handleNav('contact')}
-            className={`text-left py-2.5 px-3 rounded-lg font-sans text-base ${
+          </a>
+          <a
+            href="/contact"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNav('contact');
+            }}
+            className={`text-left py-2.5 px-3 rounded-lg font-sans text-base block ${
               currentTab === 'contact' ? 'bg-[#eff4fc] text-[#735c00] font-semibold' : 'text-[#161c22]'
             }`}
           >
             Contact & Directions
-          </button>
-          <button
-            onClick={() => handleNav('booking')}
+          </a>
+          <a
+            href="/booking"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNav('booking');
+            }}
             className="w-full bg-[#334537] text-white font-sans font-semibold py-3.5 rounded-full text-center tracking-wider text-sm shadow-md mt-2 flex items-center justify-center gap-2"
           >
             <CalendarCheck className="w-4 h-4 text-[#fed65b]" />
@@ -264,7 +304,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 {bookingCount} saved
               </span>
             )}
-          </button>
+          </a>
         </div>
       )}
     </header>

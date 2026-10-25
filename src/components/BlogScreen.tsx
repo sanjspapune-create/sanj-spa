@@ -80,10 +80,14 @@ export const BlogScreen: React.FC<BlogScreenProps> = ({
       {/* Bento Grid Layout */}
       <section className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 mb-16">
         {/* Featured Article (Span 8 cols on desktop) */}
-        <article
+        <a
           id="featured-article-card"
-          onClick={() => onOpenArticle(featuredArticle)}
-          className="md:col-span-8 group cursor-pointer h-full transition-transform duration-300 hover:scale-[1.01]"
+          href={`/blog/${featuredArticle.slug}`}
+          onClick={(e) => {
+            e.preventDefault();
+            onOpenArticle(featuredArticle);
+          }}
+          className="md:col-span-8 group cursor-pointer h-full transition-transform duration-300 hover:scale-[1.01] block"
         >
           <div className="relative rounded-2xl overflow-hidden h-[380px] sm:h-[420px] mb-4 ambient-shadow bg-[#eff4fc] border border-[#dde3eb]">
             <img
@@ -115,13 +119,17 @@ export const BlogScreen: React.FC<BlogScreenProps> = ({
               </span>
             </div>
           </div>
-        </article>
+        </a>
 
         {/* Article 2 (Span 4 cols) */}
-        <article
+        <a
           id="article-card-post-care"
-          onClick={() => onOpenArticle(article2)}
-          className="md:col-span-4 group cursor-pointer h-full flex flex-col transition-transform duration-300 hover:scale-[1.01]"
+          href={`/blog/${article2.slug}`}
+          onClick={(e) => {
+            e.preventDefault();
+            onOpenArticle(article2);
+          }}
+          className="md:col-span-4 group cursor-pointer h-full flex flex-col transition-transform duration-300 hover:scale-[1.01] block"
         >
           <div className="relative rounded-2xl overflow-hidden h-[220px] mb-3 ambient-shadow bg-[#eff4fc] border border-[#dde3eb]">
             <img
@@ -150,13 +158,17 @@ export const BlogScreen: React.FC<BlogScreenProps> = ({
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </span>
           </div>
-        </article>
+        </a>
 
         {/* Article 3 (Span 6 cols) */}
-        <article
+        <a
           id="article-card-baner"
-          onClick={() => onOpenArticle(article3)}
-          className="md:col-span-6 group cursor-pointer flex flex-col sm:flex-row bg-white rounded-2xl overflow-hidden ambient-shadow min-h-[240px] transition-transform duration-300 hover:scale-[1.01] border border-[#dde3eb]"
+          href={`/blog/${article3.slug}`}
+          onClick={(e) => {
+            e.preventDefault();
+            onOpenArticle(article3);
+          }}
+          className="md:col-span-6 group cursor-pointer flex flex-col sm:flex-row bg-white rounded-2xl overflow-hidden ambient-shadow min-h-[240px] transition-transform duration-300 hover:scale-[1.01] border border-[#dde3eb] block"
         >
           <div className="w-full sm:w-2/5 h-44 sm:h-auto relative overflow-hidden bg-[#eff4fc]">
             <img
@@ -182,7 +194,7 @@ export const BlogScreen: React.FC<BlogScreenProps> = ({
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </span>
           </div>
-        </article>
+        </a>
 
         {/* Newsletter Signup (Span 6 cols) */}
         <div className="md:col-span-6 bg-[#334537] text-white rounded-2xl p-6 sm:p-8 flex flex-col justify-center relative overflow-hidden min-h-[240px] shadow-md">

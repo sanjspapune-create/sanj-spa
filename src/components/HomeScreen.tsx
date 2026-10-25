@@ -51,22 +51,30 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-            <button
+            <a
               id="hero-book-escape-btn"
-              onClick={() => onSelectTab('booking')}
-              className="bg-[#fed65b] hover:bg-[#ffe088] text-[#263529] transition-all duration-300 px-9 py-4 rounded-full font-sans text-xs font-bold tracking-widest uppercase shadow-xl hover:shadow-[0_0_24px_rgba(254,214,91,0.5)] hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
+              href="/booking"
+              onClick={(e) => {
+                e.preventDefault();
+                onSelectTab('booking');
+              }}
+              className="bg-[#fed65b] hover:bg-[#ffe088] text-[#263529] transition-all duration-300 px-9 py-4 rounded-full font-sans text-xs font-bold tracking-widest uppercase shadow-xl hover:shadow-[0_0_24px_rgba(254,214,91,0.5)] hover:-translate-y-0.5 active:translate-y-0 active:scale-95 text-center"
             >
               Book Your Escape
-            </button>
+            </a>
 
-            <button
+            <a
               id="hero-explore-services-btn"
-              onClick={() => onSelectTab('services')}
+              href="/services"
+              onClick={(e) => {
+                e.preventDefault();
+                onSelectTab('services');
+              }}
               className="bg-white/15 hover:bg-white/25 text-white border border-white/40 backdrop-blur-md transition-all duration-300 px-8 py-4 rounded-full font-sans text-xs font-semibold tracking-widest uppercase flex items-center justify-center gap-2.5 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
             >
               <PlayCircle className="w-4 h-4 text-[#fed65b]" />
               <span>Explore Services</span>
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -261,21 +269,30 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               Expert Guides & Massage Insights
             </h2>
           </div>
-          <button
-            onClick={() => onSelectTab('blog')}
+          <a
+            href="/blog"
+            onClick={(e) => {
+              e.preventDefault();
+              onSelectTab('blog');
+            }}
             className="group flex items-center gap-2 text-xs font-bold text-[#334537] hover:text-[#735c00] tracking-wider uppercase transition-colors"
           >
             <span>Explore All Articles</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </button>
+          </a>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {featuredArticles.map((article) => (
-            <article
+            <a
               key={article.id}
-              onClick={() => (onOpenArticle ? onOpenArticle(article) : onSelectTab('blog'))}
-              className="glass-panel-white rounded-2xl border border-[#dde3eb] overflow-hidden flex flex-col hover:border-[#334537]/30 hover:shadow-lg transition-all duration-300 group cursor-pointer"
+              href={`/blog/${article.slug}`}
+              onClick={(e) => {
+                e.preventDefault();
+                if (onOpenArticle) onOpenArticle(article);
+                else onSelectTab('blog');
+              }}
+              className="glass-panel-white rounded-2xl border border-[#dde3eb] overflow-hidden flex flex-col hover:border-[#334537]/30 hover:shadow-lg transition-all duration-300 group cursor-pointer block"
             >
               <div className="relative aspect-[16/10] overflow-hidden bg-[#eff4fc]">
                 <img
@@ -321,7 +338,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                   </div>
                 </div>
               </div>
-            </article>
+            </a>
           ))}
         </div>
       </section>
